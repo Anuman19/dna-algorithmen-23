@@ -1,9 +1,6 @@
 package pva1.permutations;
 
 
-import java.util.Arrays;
-import java.util.Collections;
-
 public class Permutations {
 
     static int rowNumber = 0;
@@ -20,6 +17,10 @@ public class Permutations {
         // TODO
 
         // baseArray erstellen und mit Werten initiieren.
+        if (n == 0){
+            return new int[0][];
+        }
+
         int[] baseArray = new int[n];
         for (int i = 0; i < baseArray.length; i++) {
             baseArray[i] = i;

@@ -11,7 +11,7 @@ import java.util.Scanner;
 // Siehe Code Unten
 
 // Aufgabe 3
-// Der Algo geht zwei Mal das gesamte Array durch. einmal für max und einmal für min.
+// Der Algo geht zweimal das gesamte Array durch. einmal für max und einmal für min.
 // Insgesamt gibt es also 2(n-1) Vergleiche.
 // (n-1) weil wir ja das erste Element nicht vergleichen, sondern direkt speichern.
 
@@ -26,7 +26,7 @@ import java.util.Scanner;
 // Aufgabe 5
 // Ein Algorithmus mit weniger als n-1 vergleichen ist für das Finden von Min und Max Werten nicht möglich.
 // Man kann bei jedem Schritt mit Vergleichen die Anzahl Elemente maximal halbieren.
-// Diese Anzahl Vergleiche lässt sich nur erreichen wenn man ausschliesslich das Max/Min berechnet.
+// Diese Anzahl Vergleiche lässt sich nur erreichen, wenn man ausschliesslich das Max/Min berechnet.
 // Und auch dann nur bei ständigem Halbieren der möglichen Zahlen.
 // Wenn man sowohl Min und Max herausfinden möchte wird man immer über n Vergleiche haben.
 
