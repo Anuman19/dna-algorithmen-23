@@ -9,6 +9,8 @@ import static java.util.Objects.checkIndex;
 
 public class LinkedList<E> extends ListBasic<E> implements List<E> {
 
+    // initialising size and anchorNode of the List.
+    // From the anchorNode you can reach the first and last elements of the list
     private int size = 0;
     private final Node<E> anchorNode;
 
@@ -28,35 +30,31 @@ public class LinkedList<E> extends ListBasic<E> implements List<E> {
         return (size() == 0);
     }
 
-//    private void checkIndex(int index) {
-//        if (isEmpty() || index >= size() || index < 0) {
-//            throw new IndexOutOfBoundsException();
-//        }
-//    }
-
-
     @Override
     public E get(int index) {
+        // native utils function to check for OutOfBoundsExceptions
         checkIndex(index, size());
-
         return getNode(index).element;
     }
 
+    // Helper Function to get the Node of a specific index
+    // Used for set(), add(), remove()
     private Node<E> getNode(int index) {
-
-        //KISS - we could go backwards if index < n/2 to optimize here
-        Node<E> currentNode = anchorNode.next; //start with the first actual node
+        Node<E> currentNode = anchorNode.next;
 
         for (int i = 0; i < index; i++) {
             currentNode = currentNode.next;
         }
-        for (int i = 0; i > index; i--) {
-            currentNode = currentNode.prev;
-        }
+
+        // potentially go backwards to increase speed
+//        for (int i = 0; i > index; i--) {
+//            currentNode = currentNode.prev;
+//        }
 
         return currentNode;
     }
 
+    // replace element and return the replaced element
     @Override
     public E set(int index, E element) {
         checkIndex(index, size());
@@ -77,16 +75,16 @@ public class LinkedList<E> extends ListBasic<E> implements List<E> {
         if (!(isEmpty() && index == 0)) { //add on 0 is allowed on empty List
             checkIndex(index, size());
         }
-        Node<E> node = getNode(index - 1); //-1 as we want to append after the selected node
+        Node<E> node = getNode(index - 1); // -1 as we want to append after the selected node
         insertAfter(node, element);
     }
 
+    // Implementation of ListBasic Function
     @Override
-    public int indexOf(Object o)
-    {
+    public int indexOf(Object o) {
         Node<E> node = anchorNode.next;
         for (int i = 0; i < size(); i++) {
-            if(Objects.equals(o, node.element)) {
+            if (Objects.equals(o, node.element)) {
                 return i;
             }
             node = node.next;
@@ -94,6 +92,8 @@ public class LinkedList<E> extends ListBasic<E> implements List<E> {
         return -1;
     }
 
+    // Helper Function to add a Node after another
+    // Used for add()
     private boolean insertAfter(Node<E> nodeBeforeNew, E element) {
         Node<E> noteAfterNew = nodeBeforeNew.next;
 
@@ -109,10 +109,9 @@ public class LinkedList<E> extends ListBasic<E> implements List<E> {
         return true;
     }
 
-
     public boolean contains(Object o) {
         int index = indexOf(o);
-        return(index != -1);
+        return (index != -1);
     }
 
     @Override
@@ -127,24 +126,26 @@ public class LinkedList<E> extends ListBasic<E> implements List<E> {
     @Override
     public boolean remove(Object o) {
         int index = indexOf(o);
-        if (index == -1){
+        if (index == -1) {
             return false;
         }
         remove(index);
         return true;
     }
 
-    private void remove(Node<E> node){
+    // Helper Function to remove a specified Node
+    // Used for remove()
+    private void remove(Node<E> node) {
         //get the neighbours
         Node<E> previous = node.prev;
         Node<E> next = node.next;
 
         //check if the current element is still in the list
-        if(!node.equals(previous.next)){
+        if (!node.equals(previous.next)) {
             throw new IllegalStateException();
         }
 
-        //remove tell the neighbours that the neighbours of the current are now the neighbours
+        // reassign the neighbouring nodes of the removed nodes neighbours
         previous.next = next;
         next.prev = previous;
 
@@ -166,9 +167,6 @@ public class LinkedList<E> extends ListBasic<E> implements List<E> {
 
     // Die anderen Methoden des List-Interfaces müssen nicht implementiert werden.
 
-///////////////////////////////////////////////////
-
-
     private static class Node<E> {
         E element;
         Node<E> next;
@@ -176,24 +174,22 @@ public class LinkedList<E> extends ListBasic<E> implements List<E> {
 
         public String toString() {
             return String.join(prev.element.toString(), "<<",
-                    element.toString(), ">>" ,
+                    element.toString(), ">>",
                     next.element.toString());
-
         }
     }
 
-    private class LinkedListIterator implements Iterator<E> {        private Node<E> current = anchorNode;
+    private class LinkedListIterator implements Iterator<E> {
+        private Node<E> current = anchorNode;
 
         @Override
-        public boolean hasNext()
-        {
+        public boolean hasNext() {
             return !(current.next.equals(anchorNode));
         }
 
         @Override
-        public E next()
-        {
-            if(!hasNext()){
+        public E next() {
+            if (!hasNext()) {
                 throw new NoSuchElementException();
             }
             current = current.next;
@@ -201,12 +197,8 @@ public class LinkedList<E> extends ListBasic<E> implements List<E> {
         }
 
         @Override
-        public void remove()
-        {
+        public void remove() {
             LinkedList.this.remove(current);
         }
-
     }
-
-
 }
