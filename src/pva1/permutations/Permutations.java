@@ -13,6 +13,9 @@ public class Permutations {
      * @param n Anzahl Elemente in einer Permutation.
      * @return Ein Array von Permutationen; jede Zeile ist eine Permutation von {0,1,2,3,...,n-1}.
      * Permutation ist ein Array von Integern.
+     *
+     *
+     * testPerm4 and testPerm5 work independently but not when all tests are executed simultaneously
      */
 
     public static int[][] permutations(int n) {

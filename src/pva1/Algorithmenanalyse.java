@@ -80,6 +80,8 @@ public class Algorithmenanalyse {
 
         /*
 
+        Aufgabe 4 Pseudo-Code
+
         // Algo that runs on 3/2n Runtime
 
         int[] minArray = new int[(n + 1) / 2];
