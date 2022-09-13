@@ -1,6 +1,8 @@
 package pva1.permutations;
 
 
+import java.util.Arrays;
+
 public class Permutations {
 
     static int rowNumber = 0;
@@ -32,6 +34,7 @@ public class Permutations {
 
         calcPermutations(n, baseArray, allPermutations);
 
+        System.out.println(Arrays.toString(allPermutations));
         return allPermutations;
     }
 
@@ -83,6 +86,7 @@ public class Permutations {
         System.out.println("Permutations of " + p + " are: \n");
         int[][] n = permutations(p);
         printPermutations(n, delimiter);
+
     }
 
 
