@@ -30,9 +30,9 @@ public class ListTest
 		assertEquals("A", ll.get(0));
 		assertEquals(5, ll.size());
 		String str = ll.remove(3);
-		assertEquals("D", str);;
+		assertEquals("D", str);
 		assertSame(4, ll.size());
-		assertTrue(ll.contains("B"));		
+		assertTrue(ll.contains("B"));
 		assertFalse(ll.contains(null));
 		ll.add(null);
 		assertTrue(ll.contains(null));
