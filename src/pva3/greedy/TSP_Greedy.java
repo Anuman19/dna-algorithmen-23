@@ -3,7 +3,28 @@ package pva3.greedy;
 public class TSP_Greedy {
     static int[] findPath(int[][] adja, int start) {
         checkInput(adja, start);
-        // TODO
+
+        int[] visited = new int[adja.length];
+
+        int current = start;
+        int counter = 0;
+
+        while (counter < adja.length){
+            int min;
+            int minPlace = 0;
+
+            for (int i = 0; i++ < adja.length; i++){
+                if (adja[current][i] != 0){
+
+                }
+            }
+
+            visited[counter] = minPlace;
+            current = minPlace;
+            counter++;
+        }
+
+        // adja[start] kleinster eintrag finden ausser 0
         return null;
     }
 
