@@ -7,25 +7,36 @@ public class TSP_Greedy {
         int[] visited = new int[adja.length];
 
         int current = start;
-        int counter = 0;
 
-        while (counter < adja.length){
-            int min;
+        for (int i = 0; i < adja.length; i++){
+            int min = 2147483647;
             int minPlace = 0;
 
-            for (int i = 0; i++ < adja.length; i++){
-                if (adja[current][i] != 0){
-
+            for (int j = 0; j < adja.length; j++){
+                if (adja[current][j] != 0 && !arrayContains(visited, j)){
+                    if (adja[current][j] < min){
+                        min = adja[current][j];
+                        minPlace = j;
+                    }
                 }
             }
 
-            visited[counter] = minPlace;
+            visited[i] = minPlace;
             current = minPlace;
-            counter++;
         }
 
         // adja[start] kleinster eintrag finden ausser 0
-        return null;
+        System.out.println(visited);
+        return visited;
+    }
+
+    static boolean arrayContains(int[] array, int value){
+        for (int i = 0; i < array.length; i++){
+            if (array[i] == value){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
