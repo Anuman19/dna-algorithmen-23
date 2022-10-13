@@ -1,6 +1,5 @@
 package pva4;
 
-import java.awt.RadialGradientPaint;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -11,7 +10,7 @@ public class Median {
 
     /**
      * Bestimmt auf effiziente Art das der Größe nach n-te Element, ohne das Array zu sortieren. el =
-     * n_tesElement(array, n) liefert also das selbe wie
+     * n_tesElement(array, n) liefert also dasselbe wie
      * <pre>
      *     Arrays.sort(array);
      *     el = array[n];
@@ -26,23 +25,29 @@ public class Median {
         int pivot = 0;
         int newN = n;
 
-        System.out.println("We're looking for " + newN);
-
         Random random = new Random();
 
         ArrayList<Integer> newArray = new ArrayList<>();
         ArrayList<Integer> minList = new ArrayList<>();
         ArrayList<Integer> maxList = new ArrayList<>();
 
+        // copy original array into ArrayList
         for (int i : array) {
             newArray.add(i);
         }
+
         do {
             maxList.clear();
             minList.clear();
+
+            // select random pivot from list
             int randomPivot = random.nextInt(0, newArray.size());
             pivot = newArray.get(randomPivot);
+
+            // remove pivot from list
             newArray.remove(randomPivot);
+
+            // partition list into greater than and smaller than pivot element
             for (int num : newArray) {
                 if (num < pivot) {
                     minList.add(num);
@@ -50,27 +55,35 @@ public class Median {
                     maxList.add(num);
                 }
             }
-//
-//            System.out.println("");
-//            System.out.println("Pivot = " + pivot);
-//            System.out.println("Array = " + newArray);
-//            System.out.println("Min = " + minList);
-//            System.out.println("Max = " + maxList);
-//            System.out.println("NewN = " + newN);
-//
+
+
+            // break loop if pivot is the element searched for
             if (minList.size() == newN) {
                 break;
-            } else if (minList.size() < newN) {
+            }
+
+            // if size of minList is smaller than the position of n
+            // then the element has to be in maxList
+            else if (minList.size() < newN) {
                 newArray.clear();
                 newArray.addAll(maxList);
+
+                // error handling for duplicate numbers
                 if (newN > 0) {
+
+                    // adjust index for each smaller deleted element
                     newN = newN - minList.size() - 1;
                 }
-            } else if (minList.size() > newN) {
+            }
+
+            // if size of minList is larger than the position of n
+            // then the element has to be in minList
+            else if (minList.size() > newN) {
                 newArray.clear();
                 newArray.addAll(minList);
             }
         } while (true);
+
         return pivot;
     }
 
