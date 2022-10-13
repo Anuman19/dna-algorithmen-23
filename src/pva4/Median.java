@@ -1,6 +1,7 @@
 package pva4;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 public class Median {
@@ -22,7 +23,18 @@ public class Median {
    */
   public static int n_tesElement(int[] array, int n) {
     // TODO
-    int pivot = 0;
+
+    // parameter checking
+    Objects.checkIndex(n, array.length);
+
+    if (array.length == 1) {
+      return array[0];
+    } else if (array.length == 0){
+      throw new RuntimeException("empty array");
+    }
+
+
+    int pivot;
     int newN = n;
 
     Random random = new Random();
