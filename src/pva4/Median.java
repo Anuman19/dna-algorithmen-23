@@ -29,10 +29,9 @@ public class Median {
 
     if (array.length == 1) {
       return array[0];
-    } else if (array.length == 0){
+    } else if (array.length == 0) {
       throw new RuntimeException("empty array");
     }
-
 
     int pivot;
     int newN = n;
@@ -78,8 +77,6 @@ public class Median {
       else if (minList.size() < newN) {
         newArray.clear();
         newArray.addAll(maxList);
-
-        // error handling for duplicate numbers
 
         // adjust index for each smaller deleted element
         newN = newN - minList.size() - 1;
