@@ -14,6 +14,7 @@ public class TestMedian
 		int[] clone = array.clone();
 		int[] sortA = array.clone();
 		Arrays.sort(sortA);
+
 		for (int n = 0; n < array.length; n++)
 		{
 			assertEquals(sortA[n], Median.n_tesElement(array, n));

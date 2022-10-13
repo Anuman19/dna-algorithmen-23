@@ -69,16 +69,14 @@ public class Median {
                 newArray.addAll(maxList);
 
                 // error handling for duplicate numbers
-                if (newN > 0) {
 
-                    // adjust index for each smaller deleted element
-                    newN = newN - minList.size() - 1;
-                }
+                // adjust index for each smaller deleted element
+                newN = newN - minList.size() - 1;
             }
 
             // if size of minList is larger than the position of n
             // then the element has to be in minList
-            else if (minList.size() > newN) {
+            else {
                 newArray.clear();
                 newArray.addAll(minList);
             }
