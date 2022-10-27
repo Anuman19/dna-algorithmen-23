@@ -9,6 +9,7 @@ public class QuickSort {
    *
    * @param array Zu sortierendes Array.
    */
+
   public static void sort(int[] array) {
     // TODO
     sort(array, 0, array.length - 1);
@@ -39,7 +40,9 @@ public class QuickSort {
    * Schwellwert, bei welcher Arraygrösse in der Rekursion InsertSort statt Quicksort aufgerufen
    * werden sollte.
    */
-  static int THRESHOLD = 100; // TODO finden Sie einen sinnvollen Wert
+  static int THRESHOLD = 80; // TODO finden Sie einen sinnvollen Wert
+
+  // testing with SortCompare.java provided 80 as a viable threshold
 
   /**
    * Modifiziertes Quicksorts. Wenn die Grösse des zu sortierenden Arrays in der Rekursion einen
@@ -47,6 +50,12 @@ public class QuickSort {
    *
    * @param array Zu sortierendes Array
    */
+
+  // The tests with SortCompare.java showed that sort+ can be twice as fast as normal quicksort for
+  // an array size of 100. The difference shrinks with growing array size ->
+  // n = 500
+  // Quick = 0.023s
+  // Quick+ = 0.022s
   public static void sortPlus(int[] array) {
     sort(array, 0, array.length - 1);
 
