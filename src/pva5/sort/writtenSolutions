@@ -1,0 +1,9 @@
+In diesem Dokument befinden sich die Antworten auf die Aufgaben 3 und 5.
+
+3) Nach wiederholtem Testen von verschiedensten Längen von Arrays mit Hilfe von SortCompare scheint Quicksort ungefähr
+ab n=20 bis n=30 konsequent schneller zu sein. Vereinzelt ist immer noch Insertionsort aber ab der 30er Marke lässt sich
+Quicksort als klarer Favorit erkennen.
+
+5) nach wiederholtem Vergleichen von QuickSort und QuickSortPlus mit einem Array der Länge n=1000 lässt sich
+beobachten, dass QuickSortPlus im Schnitt ungefähr 10% besser abschneidet. Während QuickSort regelmässig Werte wie
+0.031 liefert, pendelt sich QuickSortPlus bei 0.027 ein.
