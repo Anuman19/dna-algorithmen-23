@@ -43,6 +43,7 @@ public class QuickSort {
   static int THRESHOLD = 80; // TODO finden Sie einen sinnvollen Wert
 
   // testing with SortCompare.java provided 80 as a viable threshold
+  // InsertSort is faster with smaller array size
 
   /**
    * Modifiziertes Quicksorts. Wenn die Grösse des zu sortierenden Arrays in der Rekursion einen
