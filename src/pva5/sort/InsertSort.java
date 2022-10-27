@@ -8,20 +8,7 @@ public class InsertSort
 	 */
 	public static void sort(int[] array)
 	{
-		int n = array.length;
-		for (int i = 1; i < n; ++i) {
-			int key = array[i];
-			int j = i - 1;
-
-			/* Move elements of arr[0..i-1], that are
-			greater than key, to one position ahead
-			of their current position */
-			while (j >= 0 && array[j] > key) {
-				array[j + 1] = array[j];
-				j = j - 1;
-			}
-			array[j + 1] = key;
-		}
+		sort(array, 0, array.length - 1);
 	}
 	
 	/**
@@ -34,6 +21,24 @@ public class InsertSort
 	public static void sort(int[] array, int start, int end)
 	{
 		// TODO
+
+		// loop through sub-array
+		for (int i = start; i <= end; i++) {
+
+			// key is the current element
+			int key = array[i];
+
+			// index of predecessor
+			int j = i - 1;
+
+			// compare elements of array to key;
+			// if they are greater than key -> move them on step forward
+			while (j >= 0 && array[j] > key) {
+				array[j + 1] = array[j];
+				j = j - 1;
+			}
+			array[j + 1] = key;
+		}
 	}
 
 }

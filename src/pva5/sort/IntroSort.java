@@ -26,7 +26,18 @@ public class IntroSort
 	 */
 	public static void sort(int[] array, int start, int end, int maxDepth)
 	{
-		
+
+		// error-handling
+		if (start >= end) return;
+
+		// if 2n * log2(n) then use HeapSort to avoid worst-case of QuickSort
+		if (maxDepth <= 0){
+			HeapSort.sort(array, start, end);
+		} else {
+
+			// else, use QuickSort
+			QuickSort.sort(array, start, end);
+		}
 	}
 
 	/**
