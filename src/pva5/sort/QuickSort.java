@@ -58,7 +58,7 @@ public class QuickSort {
   // Quick = 0.023s
   // Quick+ = 0.022s
   public static void sortPlus(int[] array) {
-    sort(array, 0, array.length - 1);
+    sortPlus(array, 0, array.length - 1);
 
   }
 
@@ -76,9 +76,19 @@ public class QuickSort {
 
     // if Threshold is not met - use InsertSort, else stick with QuickSort
     if (end - start < THRESHOLD) {
-      InsertSort.sort(array);
+      InsertSort.sort(array, start, end);
     } else {
-      sort(array);
+      if (start < end) {
+
+        // pi is partitioning index, arr[p]
+        // is now at right place
+        int pi = partition(array, start, end, findPivot(array, start, end));
+
+        // Separately sort elements before
+        // partition and after partition
+        sortPlus(array, start, pi - 1);
+        sortPlus(array, pi + 1, end);
+      }
     }
   }
 
