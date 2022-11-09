@@ -1,4 +1,4 @@
-package ch.ffhs.dua.binSearch;
+package pva6;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
