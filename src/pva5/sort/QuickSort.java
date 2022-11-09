@@ -92,6 +92,32 @@ public class QuickSort {
     }
   }
 
+  public static void sortPlusIntro(int[] array) {
+    sortPlus(array, 0, array.length - 1);
+
+  }
+  public static void sortPlusIntro(int[] array, int start, int end, int maxDepth) {
+    // TODO
+
+    // if Threshold is not met - use InsertSort, else stick with QuickSort
+    if (end - start < THRESHOLD) {
+      InsertSort.sort(array, start, end);
+    } else {
+      if (start < end) {
+
+        // pi is partitioning index, arr[p]
+        // is now at right place
+        int pi = partition(array, start, end, findPivot(array, start, end));
+
+        maxDepth -= 1;
+        // Separately sort elements before
+        // partition and after partition
+        IntroSort.sort(array, start, pi - 1, maxDepth);
+        IntroSort.sort(array, pi + 1, end, maxDepth);
+      }
+    }
+  }
+
   /**
    * Hilfsmethode für Quicksort. Ein Teilstück eines Arrays wird geteilt, so dass alle Elemente, die
    * kleiner als ein gewisses Pivot-Elements sind, links stehen und alle Elemente, die grösser als

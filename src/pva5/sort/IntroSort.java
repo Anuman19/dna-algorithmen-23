@@ -18,7 +18,7 @@ public class IntroSort
 	}
 	
 	/**
-	 * Sortiert eine Teilstück eines Arrays mit IntroSort.
+	 * Sortiert ein Teilstück eines Arrays mit IntroSort.
 	 * @param array Zu sortierendes Array
 	 * @param start Index des ersten Elementes des zu sortierenden Stücks.
 	 * @param end   Index des letzten Elementes des zu sortierenden Stücks.
@@ -36,7 +36,7 @@ public class IntroSort
 		} else {
 
 			// else, use QuickSort
-			QuickSort.sort(array, start, end);
+			QuickSort.sortPlusIntro(array, start, end, maxDepth);
 		}
 	}
 
