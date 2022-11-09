@@ -1,4 +1,4 @@
-package pva6;
+package pva6.binSearch;
 
 public class BinSearch {
 

@@ -1,4 +1,4 @@
-package pva6;
+package pva6.binSearch;
 
 /**
  * Einfache Klasse für ein Paar von zwei int-Werten.

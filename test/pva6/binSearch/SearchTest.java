@@ -1,6 +1,9 @@
-package pva6;
+package pva6.binSearch;
 
 import org.junit.jupiter.api.Test;
+import pva6.binSearch.BinSearch;
+import pva6.binSearch.Pair;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SearchTest 
