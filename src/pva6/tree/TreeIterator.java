@@ -12,16 +12,18 @@ import java.util.Stack;
 public class TreeIterator<N> implements Iterator<N> {
 
   /**
-   * Erzeugt einen neuen neuen Baum-Knoten-Iterator
+   * Erzeugt einen neuen Baum-Knoten-Iterator
    *
    * @param node Die Wurzel des zu traversierenden Baumes.
    */
 
-  private Stack<TreeNode<N>> nodes = new Stack<>();
+  // initialize stack
+  private final Stack<TreeNode<N>> nodes = new Stack<>();
 
   public TreeIterator(TreeNode<N> node) {
     // TODO
 
+    // push root node on stack in constructor
     nodes.push(node);
   }
 
@@ -29,6 +31,7 @@ public class TreeIterator<N> implements Iterator<N> {
   public boolean hasNext() {
     //TODO
 
+    // check if stack is empty and return
     return !nodes.empty();
   }
 
@@ -36,17 +39,22 @@ public class TreeIterator<N> implements Iterator<N> {
   public N next() {
     // TODO
 
+    // check if empty --> error handling
     if (!hasNext()) {
       throw new NoSuchElementException();
     }
 
+    // get current node
     TreeNode<N> current = nodes.pop();
 
+    // stop when current is null
     if (current != null) {
       // store all children of current node from right to left
       for (int i = current.children().size() - 1; i >= 0; i--) {
         nodes.add(current.children().get(i));
       }
+
+      // return node value
       return current.value();
     } else {
       return null;

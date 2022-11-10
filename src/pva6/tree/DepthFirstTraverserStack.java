@@ -13,7 +13,7 @@ public abstract class DepthFirstTraverserStack<N> {
   /**
    * Traversiert einen Baum mit Tiefensuche.
    *
-   * @paramDie Wurzel des zu traversierenden Baumes.
+   * @param root Die Wurzel des zu traversierenden Baumes.
    */
   public void traverse(TreeNode<N> root) {
     //TODO
@@ -50,6 +50,6 @@ public abstract class DepthFirstTraverserStack<N> {
    *
    * @param value
    */
-  abstract protected void visitNode(N value);
+  protected abstract void visitNode(N value);
 
 }   

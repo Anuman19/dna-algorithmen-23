@@ -25,8 +25,8 @@ public abstract class DepthFirstTraverserRec<N>
 		preOperation(node.value());
 		if (node.children() != null){
 			List<TreeNode<N>> children = node.children();
-			for (int i = 0; i < children.size(); i++){
-				traverse(children.get(i));
+			for (TreeNode<N> child : children) {
+				traverse(child);
 			}
 		}
 
@@ -38,12 +38,12 @@ public abstract class DepthFirstTraverserRec<N>
 	 * Operation auf einem Knoten, bevor die Nachkommen besucht wurden.
 	 * @param value
 	 */
-	abstract protected void preOperation(N value);   
+	protected abstract void preOperation(N value);
     
 	/**
 	 * Operation auf einem Knoten, nachdem die Nachkommen besucht wurden.
 	 * @param value
 	 */
-	abstract protected void postOperation(N value);  
+	protected abstract void postOperation(N value);
 
 }   
