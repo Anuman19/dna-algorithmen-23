@@ -25,7 +25,6 @@ public abstract class DepthFirstTraverserStack<N> {
     nodes.push(root);
 
     // loop until stack is empty
-
     while (!nodes.empty()) {
 
       // pop current node from stack and store

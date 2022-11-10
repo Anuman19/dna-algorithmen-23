@@ -16,16 +16,19 @@ public class BinSearch {
     return binarySearch(array, 0, array.length - 1, value);
   }
 
+  // search function with the beginning and end of subarray to be searched.
+  // allows for easy recursion
   public static Pair binarySearch(int[] arr, int l, int r, int x) {
     if (r >= l) {
       int mid = l + (r - l) / 2;
 
-      // If the element is present at the
-      // middle itself
+      // if the element is found.
+      // searching if there are multiple occurrences of it.
       if (arr[mid] == x) {
         int i = 1;
         int lower = mid;
         int higher = mid;
+        // search array for occurrences of x that are below the previous found ones
         while ((mid - i) >= 0){
           if (arr[mid-i] == x){
             lower = mid-i;
@@ -34,6 +37,7 @@ public class BinSearch {
             break;
           }
         }
+        // search array for occurrences of x that are above the previous found ones
         i = 1;
         while ((mid + i) < arr.length){
           if (arr[mid+i] == x){
@@ -46,19 +50,16 @@ public class BinSearch {
         return new Pair(lower, higher);
       }
 
-      // If element is smaller than mid, then
-      // it can only be present in left subarray
+      // If element is smaller than mid, then it can only be present in left subarray
       if (arr[mid] > x) {
         return binarySearch(arr, l, mid - 1, x);
       }
 
-      // Else the element can only be present
-      // in right subarray
+      // Else the element can only be present in right subarray
       return binarySearch(arr, mid + 1, r, x);
     }
 
-    // We reach here when element is not present
-    // in array
+    // return null if element is not present in the array
     return null;
   }
 }
