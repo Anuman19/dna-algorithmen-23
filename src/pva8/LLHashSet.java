@@ -13,34 +13,26 @@ import java.util.NoSuchElementException;
 
 public class LLHashSet<E> extends SetBasic<E> {
 
-  public class DoublyLinkedListNode<E> {
+  class LinkedHash<E> {
+    String key;
+    E value;
+    LinkedHash next;
 
-    // Declaration of Nodes
-    DoublyLinkedListNode<E> next;
-    DoublyLinkedListNode<E> prev;
-    E data;
-
-    // constructor
-    DoublyLinkedListNode(E data) {
-      this.data = data;
-      next = null;
-      prev = null;
+    // constructor of linked hash
+    LinkedHash(String key, E value)
+    {
+      this.key = key;
+      this.value = value;
+      this.next = null;
     }
   }
 
-  // Declaration of Hash Table
-  DoublyLinkedListNode<E>[] hashTable;
-
-  // stores the size of HashTable
-  int size;
-
+  private final int tableSize;
+  private int size;
+  public LinkedHash<E>[] table;
   public LLHashSet() {
-    hashTable = new DoublyLinkedListNode[16];
-    size = 0;
-  }
-
-  public LLHashSet(int hashTableSize) {
-    hashTable = new DoublyLinkedListNode[hashTableSize];
+    this.tableSize = 64;
+    this.table = new LinkedHash[tableSize];
     size = 0;
   }
 
@@ -54,129 +46,112 @@ public class LLHashSet<E> extends SetBasic<E> {
 
     // kein TODO??
 
-    // gets the position/index where the value should be
-    // stored
-    int position = hash(e);
-
-    // creates a node for storing value
-    DoublyLinkedListNode<E> node = new DoublyLinkedListNode<>(e);
-
-    DoublyLinkedListNode<E> start = hashTable[position];
-
-    if (hashTable[position] != null) {
-      node.next = start;
-      start.prev = node;
+    int hash = (hash(e) % tableSize);
+    if (table[hash] == null) {
+      table[hash] = new LinkedHash((String) e, e);
     }
-    hashTable[position] = node;
+    else {
+      LinkedHash entry = table[hash];
+      while (entry.next != null
+          && !entry.key.equals(e)) {
+        entry = entry.next;
+      }
+      if (entry.key.equals(e)) {
+        entry.value = e;
+      }
+      else {
+        entry.next = new LinkedHash((String) e, e);
+      }
+    }
     size++;
     return true;
+
   }
 
   @Override
   public boolean remove(Object o) {
     // TODO
 
-    try {
-      // gets the position where the value to
-      // be deleted exists
-      int position = hash(o);
-
-      DoublyLinkedListNode<E> start = hashTable[position];
-
-      DoublyLinkedListNode<E> end = start;
-
-      // if value is found at start
-      if (start.data == o) {
-        size--;
-        if (start.next == null) {
-          // removing the value
-          hashTable[position] = null;
-
-        }
-
-        start = start.next;
-        start.prev = null;
-        hashTable[position] = start;
-
-        return true;
-      }
-
-      // traversing the list
-      // until the value is found
-      while (end.next != null && end.next.data != o) {
-        end = end.next;
-      }
-
-      // if reached at the end without finding the
-      // value
-      if (end.next == null) {
-        System.out.println("\nElement not found\n");
-        return false;
-      }
-
-      size--;
-
-      if (end.next.next == null) {
-        end.next = null;
-        return false;
-      }
-
-      end.next.next.prev = end;
-      end.next = end.next.next;
-
-      hashTable[position] = start;
-    } catch (Exception e) {
-      System.out.println("\nElement not found\n");
+    if (size == 0){
+      return false;
     }
-    return false;
+    int value = (hash(o) % tableSize);
+    if (table[value] != null) {
+      LinkedHash prev = null;
+      LinkedHash current = table[value];
+      while (current.next != null
+          && !current.key.equals(o)) {
+        prev = current;
+        current = current.next;
+      }
+      if (current.key.equals(o)) {
+        if (prev == null) {
+          table[value] = current.next;
+        }
+        else {
+          prev.next = current.next;
+        }
+        size--;
+      }
+    }
+    return true;
   }
 
   // Definition of Hash function
   private int hash(Object x) {
-    int hashValue = x.hashCode();
-
-    hashValue %= hashTable.length;
-
-    if (hashValue < 0) {
-      hashValue += hashTable.length;
+    int value = x.hashCode();
+    value %= tableSize;
+    if (value < 0) {
+      value = value + tableSize;
     }
-
-    return hashValue;
+    return value;
   }
 
 
-  public class HashTableIterator implements Iterator<E> {
-
-    private DoublyLinkedListNode<E> current;
-
-    public HashTableIterator(LLHashSet<E> hashSet) {
-      current = hashSet.hashTable[0];
-    }
-
-    @Override
-    public boolean hasNext() {
-
-      return current != null;
-    }
-
-    @Override
-    public E next() {
-      if (!hasNext()) {
-        throw new NoSuchElementException();
-      }
-
-      E tmp = current.data;
-      current = current.next;
-      return tmp;
-    }
-  }
 
   @Override
   public Iterator<E> iterator() {
-    // TODO??
-
-    return new HashTableIterator(this);
+    return new HashSetIterator(this);
   }
+
+  private class HashSetIterator implements Iterator<E> {
+
+    private int size = 0;
+    private LinkedHash<E> node;
+    private LinkedHash<E> pointer = this.node;
+
+    private void resetIteratorPointer() {
+      pointer=this.node;
+    }
+
+    public HashSetIterator(LLHashSet<E> hashSet){
+      this.node = hashSet.table[0];
+    }
+
+    @Override
+    // checks whether there is a next node
+    public boolean hasNext() {
+
+      if (pointer == null){
+        resetIteratorPointer();
+        return false;
+      } else {
+        return true;
+      }
+    }
+
+    @Override
+    // returns neighbor node
+    public E next() {
+
+      if (!hasNext()) {
+        throw new NoSuchElementException();
+      }
+      E data = pointer.value;
+      pointer = pointer.next;
+      return data;
+    }}
+
 
   @Override
   public int size() {
@@ -194,7 +169,7 @@ public class LLHashSet<E> extends SetBasic<E> {
   public void clear() {
     // TODO
 
-    hashTable = new DoublyLinkedListNode[hashTable.length];
+    table = new LinkedHash[table.length];
     size = 0;
   }
 }
